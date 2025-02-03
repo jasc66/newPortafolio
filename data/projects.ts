@@ -1,0 +1,190 @@
+export interface Project {
+  title: string
+  description: string
+  technologies: string[]
+  duration: string
+  imageUrl: string
+  projectUrl: string
+  tag: string
+  status: "En construcción" | "Completo"
+  github?: string // Campo opcional para el enlace al repositorio de GitHub
+}
+
+export const projectsData: Project[] = [
+  {
+    title: "ChatBot",
+    description: "ChatBot Servicio Civil, Next js, Typescript, Tailwind CSS, en construcción",
+    technologies: ["Next.js", "TypeScript", "Tailwind CSS"],
+    duration: "3 Semanas",
+    imageUrl: "/images/project/chatbot.png",
+    projectUrl: "https://chatbot-servicio-civil.vercel.app/",
+    tag: "ChatBot",
+    status: "En construcción",
+  },
+  {
+    title: "Carrito de Compras",
+    description: "Sitio de compras de productos agropecuarios",
+    technologies: ["React", "Next.js", "Tailwind CSS"],
+    duration: "4 Semanas",
+    imageUrl: "/images/project/AppCarrito.png",
+    projectUrl: "https://carritoapp.vercel.app/",
+    tag: "Food",
+    status: "En construcción",
+  },
+  {
+    title: "Restaurante De La Finca",
+    description: "Sitio de comidas para restaurante De la Finca, en construcción",
+    technologies: ["HTML", "CSS", "JavaScript"],
+    duration: "3 Semanas",
+    imageUrl: "/images/project/de-la-finca.png",
+    projectUrl: "https://de-la-finca.vercel.app/index.html",
+    tag: "Food",
+    status: "En construcción",
+  },
+  {
+    title: "Contador de Calorías",
+    description:
+      "Contador de calorías desarrollado con React, VITE, y TypeScript, que permite realizar un seguimiento de la ingesta de alimentos. En construcción.",
+    technologies: ["React", "TypeScript", "Vite"],
+    duration: "2 semanas",
+    imageUrl: "/images/project/contador.webp",
+    projectUrl: "https://calorie-tracker-zxzn.vercel.app/",
+    tag: "Contador",
+    status: "En construcción",
+  },
+  {
+    title: "AppFood",
+    description: "Aplicación web de gestión de alimentos diseñada con HTML y CSS. En construcción.",
+    technologies: ["HTML", "CSS"],
+    duration: "1 semana",
+    imageUrl: "/images/project/appfood.webp",
+    projectUrl: "https://app-food-xi.vercel.app/",
+    tag: "Plantilla",
+    status: "En construcción",
+  },
+  {
+    title: "Registro de Actividades Semanales MAG",
+    description:
+      "Sistema de registro de actividades desarrollado con React, VITE, y TypeScript, diseñado para gestionar las actividades semanales. En construcción.",
+    technologies: ["React", "TypeScript", "Vite"],
+    duration: "2 meses",
+    imageUrl: "/images/project/Project_12_a.webp",
+    projectUrl: "https://progra-semanal.vercel.app/",
+    tag: "Registro",
+    status: "En construcción",
+  },
+  {
+    title: "Cotizador de Propinas React",
+    description: "Aplicación para calcular propinas, desarrollada con React, VITE, y TypeScript. Proyecto completo.",
+    technologies: ["React", "TypeScript", "Vite"],
+    duration: "1 mes",
+    imageUrl: "/images/project/cotizador.webp",
+    projectUrl: "https://cotizador-react-vite-type.vercel.app/",
+    tag: "Restaurante",
+    status: "Completo",
+  },
+  {
+    title: "Rajabegum",
+    description:
+      "Plantilla web creada con HTML, CSS, SASS, y GULP, para un sitio de servicios profesionales. En construcción.",
+    technologies: ["HTML", "CSS", "SASS", "GULP"],
+    duration: "1 mes",
+    imageUrl: "/images/project/Project_13_a.webp",
+    projectUrl: "https://los-mora.vercel.app/",
+    tag: "Plantilla",
+    status: "En construcción",
+  },
+  {
+    title: "Envío Email",
+    description:
+      "Plantilla de correo electrónico desarrollada en React y JavaScript para gestionar el envío de correos electrónicos. Proyecto completo.",
+    technologies: ["React", "JavaScript"],
+    duration: "1 mes",
+    imageUrl: "/images/project/Project_1_a.webp",
+    projectUrl: "https://enviocorreo.netlify.app",
+    tag: "Envio",
+    status: "Completo",
+  },
+  {
+    title: "Sitio Agropecuario",
+    description:
+      "Sitio web para el sector agropecuario, desarrollado con plantillas y diseño responsivo. Proyecto completo.",
+    technologies: ["HTML", "CSS", "JavaScript"],
+    duration: "1 mes",
+    imageUrl: "/images/project/Project_7_a.webp",
+    projectUrl: "https://nosfuimosdelmag.netlify.app",
+    tag: "Agropecuario",
+    status: "Completo",
+  },
+  {
+    title: "Cotizador de Préstamos",
+    description: "Aplicación de cotización de préstamos usando React Hook. Proyecto completo.",
+    technologies: ["React", "JavaScript"],
+    duration: "1 mes",
+    imageUrl: "/images/project/Project_8_a.webp",
+    projectUrl: "https://cotizadorreactprestamos.netlify.app",
+    tag: "Cotizador",
+    status: "Completo",
+  },
+  {
+    title: "Restaurante",
+    description: "Plantilla para un restaurante con diseño responsive, en construcción.",
+    technologies: ["HTML", "CSS", "JavaScript"],
+    duration: "1 mes",
+    imageUrl: "/images/project/Project_2_a.webp",
+    projectUrl: "https://ketonoah.netlify.app",
+    tag: "Comidas",
+    status: "En construcción",
+  },
+  {
+    title: "API Rest",
+    description: "Proyecto que consume una API REST, desarrollado con React. Proyecto completo.",
+    technologies: ["React", "JavaScript", "REST API"],
+    duration: "1 Semana",
+    imageUrl: "/images/project/Project_3_a.webp",
+    projectUrl: "https://buscadorapi.netlify.app",
+    tag: "Consumo",
+    status: "Completo",
+  },
+  {
+    title: "Jornada Agro",
+    description: "Sitio informativo sobre jornadas agropecuarias. Proyecto completo.",
+    technologies: ["HTML", "CSS", "JavaScript"],
+    duration: "2 Semanas",
+    imageUrl: "/images/project/Project_4_a.webp",
+    projectUrl: "https://jornadaagro.netlify.app",
+    tag: "Informativo",
+    status: "Completo",
+  },
+  {
+    title: "Belleza",
+    description: "Sitio web de reservas para un salón de belleza. En construcción.",
+    technologies: ["HTML", "CSS", "JavaScript"],
+    duration: "4 meses",
+    imageUrl: "/images/project/Project_5_a.webp",
+    projectUrl: "https://laurasalon.netlify.app",
+    tag: "Reservas",
+    status: "En construcción",
+  },
+  {
+    title: "Psicología",
+    description: "Sitio web informativo para una clínica de psicología. En construcción.",
+    technologies: ["HTML", "CSS", "JavaScript"],
+    duration: "1 mes",
+    imageUrl: "/images/project/Project_6_a.webp",
+    projectUrl: "https://psicoalaya.netlify.app",
+    tag: "Informativo",
+    status: "En construcción",
+  },
+  {
+    title: "Victoria Arronis",
+    description: "Blog profesional desarrollado en React, en construcción.",
+    technologies: ["React", "Next.js", "Tailwind CSS"],
+    duration: "3 Semanas",
+    imageUrl: "/images/project/Project_9_a.webp",
+    projectUrl: "https://victoriaarronis.netlify.app",
+    tag: "Blog",
+    status: "En construcción",
+  },
+]
+
