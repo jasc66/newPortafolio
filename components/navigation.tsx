@@ -76,10 +76,10 @@ export function Navigation() {
   )
 
   const socialLinks = [
-    { id: "github", href: "https://github.com/JorgeSanchezF", icon: Github },
+    { id: "github", href: "https://github.com/jasc66", icon: Github },
     {
       id: "linkedin",
-      href: "https://www.linkedin.com/in/jorge-s%C3%A1nchez-fern%C3%A1ndez-a8a8b8203/",
+      href: "https://www.linkedin.com/in/alonso-salguero/",
       icon: Linkedin,
     },
     { id: "codepen", href: "#", icon: Codepen },
