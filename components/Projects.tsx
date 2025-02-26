@@ -6,6 +6,7 @@ import { ExternalLink, Github } from "lucide-react"
 import Image from "next/image"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
+import { Loader } from "@/components/ui/loader"
 
 function ProjectCard({ project }: { project: Project }) {
   return (
@@ -37,13 +38,13 @@ function ProjectCard({ project }: { project: Project }) {
                 <Badge variant={project.status === "Completo" ? "default" : "secondary"}>{project.status}</Badge>
               </div>
               <div className="flex items-center gap-4">
-                <ExternalLink size={20} className="text-slate group-hover:text-green transition-colors" />
+                <ExternalLink size={20} className="text-light-slate hover:text-green transition-colors" />
                 {project.github && (
                   <a
                     href={project.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-slate hover:text-green transition-colors"
+                    className="text-light-slate hover:text-green transition-colors"
                     onClick={(e) => e.stopPropagation()}
                   >
                     <Github size={20} />
@@ -53,13 +54,13 @@ function ProjectCard({ project }: { project: Project }) {
             </div>
 
             <div className="bg-navy/50 rounded-lg p-4 mb-4 backdrop-blur-sm">
-              <p className="text-slate">{project.description}</p>
+              <p className="text-light-slate">{project.description}</p>
             </div>
           </div>
 
           <div>
-            <div className="mb-4 text-xs text-slate">
-              <span className="font-mono">Duración:</span> {project.duration}
+            <div className="mb-4 text-xs text-light-slate">
+              <span className="font-mono text-green">Duración:</span> {project.duration}
             </div>
 
             <ul className="flex flex-wrap gap-2 font-mono text-xs">
@@ -82,6 +83,7 @@ function ProjectCard({ project }: { project: Project }) {
 export function Projects() {
   const [filter, setFilter] = useState<"todos" | "completo" | "construccion">("todos")
   const [visibleProjects, setVisibleProjects] = useState(6)
+  const [isLoading, setIsLoading] = useState(false)
 
   const filteredProjects = projectsData.filter((project) => {
     if (filter === "todos") return true
@@ -90,14 +92,17 @@ export function Projects() {
     return true
   })
 
-  const showMoreProjects = () => {
+  const showMoreProjects = async () => {
+    setIsLoading(true)
+    await new Promise((resolve) => setTimeout(resolve, 1000))
     setVisibleProjects((prev) => Math.min(prev + 6, filteredProjects.length))
+    setIsLoading(false)
   }
 
   return (
-    <section id="projects" className="py-12 md:py-16 min-h-screen">
+    <div className="max-w-4xl mx-auto">
       <div className="mb-12">
-        <h2 className="numbered-heading mb-6">
+        <h2 className="numbered-heading mb-6 text-2xl">
           <span className="text-green font-mono text-sm mr-2">04.</span>
           Proyectos
         </h2>
@@ -108,8 +113,8 @@ export function Projects() {
               setFilter("todos")
               setVisibleProjects(6)
             }}
-            className={`px-4 py-2 rounded transition-colors ${
-              filter === "todos" ? "bg-green text-navy" : "text-slate hover:text-green"
+            className={`px-4 py-2 rounded transition-colors font-medium ${
+              filter === "todos" ? "bg-green text-navy" : "text-light-slate hover:text-green hover:bg-green/10"
             }`}
           >
             Todos
@@ -119,8 +124,8 @@ export function Projects() {
               setFilter("completo")
               setVisibleProjects(6)
             }}
-            className={`px-4 py-2 rounded transition-colors ${
-              filter === "completo" ? "bg-green text-navy" : "text-slate hover:text-green"
+            className={`px-4 py-2 rounded transition-colors font-medium ${
+              filter === "completo" ? "bg-green text-navy" : "text-light-slate hover:text-green hover:bg-green/10"
             }`}
           >
             Completados
@@ -130,8 +135,8 @@ export function Projects() {
               setFilter("construccion")
               setVisibleProjects(6)
             }}
-            className={`px-4 py-2 rounded transition-colors ${
-              filter === "construccion" ? "bg-green text-navy" : "text-slate hover:text-green"
+            className={`px-4 py-2 rounded transition-colors font-medium ${
+              filter === "construccion" ? "bg-green text-navy" : "text-light-slate hover:text-green hover:bg-green/10"
             }`}
           >
             En Construcción
@@ -147,12 +152,17 @@ export function Projects() {
 
       {visibleProjects < filteredProjects.length && (
         <div className="mt-12 text-center">
-          <Button onClick={showMoreProjects} variant="outline" className="border-green text-green hover:bg-green/10">
-            Ver más proyectos
+          <Button
+            onClick={showMoreProjects}
+            variant="outline"
+            className="border-green text-green hover:text-navy hover:bg-green hover:border-green transition-colors min-w-[200px] font-medium"
+            disabled={isLoading}
+          >
+            {isLoading ? <Loader /> : "Ver más proyectos"}
           </Button>
         </div>
       )}
-    </section>
+    </div>
   )
 }
 

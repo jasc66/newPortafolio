@@ -13,56 +13,24 @@ export function Navigation() {
   const navLabels = ["Inicio", "Sobre Mí", "Estudios", "Experiencia", "Proyectos"]
 
   useEffect(() => {
-    const sections = document.querySelectorAll<HTMLElement>("section[id]")
-    if (sections.length === 0) return
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting && entry.intersectionRatio >= 0.3) {
-            setActiveSection(entry.target.id)
-          }
-        })
-      },
-      {
-        rootMargin: "-20% 0px -20% 0px",
-        threshold: [0.3, 0.4, 0.5, 0.6, 0.7],
-      },
-    )
-
-    sections.forEach((section) => observer.observe(section))
-
-    const isNearProjectsSection = () => {
-      const projectsSection = document.getElementById("projects")
-      if (projectsSection) {
-        const rect = projectsSection.getBoundingClientRect()
-        return rect.top <= window.innerHeight * 0.3
-      }
-      return false
-    }
-
     const handleScroll = () => {
-      if (isNearProjectsSection()) {
-        setActiveSection("projects")
-      } else {
-        const scrollPosition = window.scrollY + window.innerHeight * 0.3
-        for (let i = sections.length - 1; i >= 0; i--) {
-          const section = sections[i]
-          if (section.offsetTop <= scrollPosition) {
-            setActiveSection(section.id)
-            break
-          }
+      const sections = document.querySelectorAll<HTMLElement>("section[id]")
+      const scrollPosition = window.scrollY + window.innerHeight * 0.3
+
+      sections.forEach((section) => {
+        const sectionTop = section.offsetTop
+        const sectionBottom = sectionTop + section.offsetHeight
+
+        if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+          setActiveSection(section.id)
         }
-      }
+      })
+
       setIsScrolled(window.scrollY > 50)
     }
 
     window.addEventListener("scroll", handleScroll, { passive: true })
-
-    return () => {
-      sections.forEach((section) => observer.unobserve(section))
-      window.removeEventListener("scroll", handleScroll)
-    }
+    return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
   const scrollToSection = (id: string) => {
@@ -76,13 +44,13 @@ export function Navigation() {
   }
 
   const NavLinks = () => (
-    <nav className="flex gap-3 md:gap-5">
+    <nav className="flex flex-col gap-8">
       {navIds.map((id, index) => (
         <Link
           key={id}
           href={`#${id}`}
-          className={`nav-link text-xs tracking-normal md:tracking-wider uppercase flex items-center gap-2 md:gap-3 group relative overflow-visible whitespace-normal md:whitespace-nowrap ${
-            activeSection === id ? "text-green" : "text-slate hover:text-green transition-colors"
+          className={`nav-link text-xs tracking-[0.2em] uppercase flex items-center gap-4 group relative ${
+            activeSection === id ? "text-green font-medium" : "text-light-slate hover:text-green transition-colors"
           }`}
           onClick={(e) => {
             e.preventDefault()
@@ -91,10 +59,8 @@ export function Navigation() {
         >
           <div className="relative">
             <div
-              className={`h-[1px] w-8 md:w-12 transition-all duration-300 ${
-                activeSection === id
-                  ? "w-16 md:w-24 bg-green"
-                  : "bg-slate/20 group-hover:w-16 md:group-hover:w-24 group-hover:bg-green"
+              className={`h-[1px] w-12 transition-all duration-300 ${
+                activeSection === id ? "w-24 bg-green" : "bg-slate/20 group-hover:w-24 group-hover:bg-green"
               }`}
             />
             <div
@@ -103,7 +69,7 @@ export function Navigation() {
               }`}
             />
           </div>
-          <span className="relative z-10 text-[11px] md:text-xs">{navLabels[index]}</span>
+          <span className="relative z-10">{navLabels[index]}</span>
         </Link>
       ))}
     </nav>
@@ -122,18 +88,35 @@ export function Navigation() {
     { id: "whatsapp", href: "https://wa.me/50687109971", icon: Phone },
   ]
 
+  const getBackgroundClass = () => {
+    switch (activeSection) {
+      case "home":
+        return "bg-section-1"
+      case "about":
+        return "bg-section-2"
+      case "estudios":
+        return "bg-section-3"
+      case "experience":
+        return "bg-section-4"
+      case "projects":
+        return "bg-section-5"
+      default:
+        return "bg-section-1"
+    }
+  }
+
   const SocialLinks = () => (
-    <div className="flex gap-6">
+    <div className="flex flex-wrap gap-2 px-2">
       {socialLinks.map(({ id, href, icon: Icon }) => (
         <a
           key={id}
           href={href}
           target="_blank"
           rel="noopener noreferrer"
-          className="nav-link text-slate hover:text-green transition-colors relative"
-          aria-label={id}
+          className="text-light-slate hover:text-green transition-colors p-1"
+          aria-label={`Visitar ${id}`}
         >
-          <Icon size={24} className="relative z-10" />
+          <Icon size={18} aria-hidden="true" />
         </a>
       ))}
     </div>
@@ -141,22 +124,21 @@ export function Navigation() {
 
   return (
     <>
-      {/* Mobile/Tablet Navigation (hasta 900px) */}
-      <div
-        className={`fixed top-0 left-0 right-0 z-50 block md:hidden ${isScrolled ? "bg-navy/90 backdrop-blur-sm" : ""}`}
-      >
-        <div className="flex items-center justify-between p-4">
+      {/* Mobile Navigation */}
+      <div className={`fixed top-0 left-0 right-0 z-50 lg:hidden ${isScrolled ? "bg-navy/90 backdrop-blur-sm" : ""}`}>
+        <div className="flex items-center justify-between p-6">
           <div>
             <h1 className="text-xl font-bold text-lightest-slate">Alonso Salguero C.</h1>
             <p className="text-sm text-slate capitalize">{activeSection === "home" ? "Inicio" : activeSection}</p>
           </div>
           <Sheet>
             <SheetTrigger asChild>
-              <button className="nav-link text-slate hover:text-green relative">
-                <Menu size={24} className="relative z-10" />
+              <button className="nav-link text-slate hover:text-green relative p-2" aria-label="Abrir menú">
+                <Menu size={24} className="relative z-10" aria-hidden="true" />
+                <span className="sr-only">Abrir menú</span>
               </button>
             </SheetTrigger>
-            <SheetContent side="right" className="w-[300px] bg-light-navy">
+            <SheetContent side="right" className={`w-[320px] ${getBackgroundClass()} transition-colors duration-500`}>
               <div className="flex flex-col h-full justify-between py-12">
                 <div className="space-y-12">
                   <div className="space-y-4">
@@ -172,66 +154,21 @@ export function Navigation() {
         </div>
       </div>
 
-      {/* Medium Navigation (900px - 1024px) */}
-      <div className="hidden md:block lg:hidden fixed top-0 left-0 right-0 z-50">
-        <div
-          className={`w-full h-[160px] flex flex-col justify-between p-4 ${
-            isScrolled ? "bg-navy/90 backdrop-blur-sm" : "bg-navy"
-          }`}
-        >
-          <div className="space-y-2 max-w-3xl mx-auto w-full pl-4">
-            <h1 className="text-3xl md:text-4xl font-bold text-lightest-slate">Alonso Salguero C.</h1>
-            <h2 className="text-xl md:text-2xl text-slate">Full Stack Developer</h2>
-            <p className="text-base md:text-lg text-slate/80">
-              I build accessible, pixel-perfect digital experiences for the web.
-            </p>
-          </div>
-          <div className="space-y-6 max-w-3xl mx-auto w-full pl-4">
+      {/* Desktop Navigation */}
+      <div
+        className={`hidden lg:block fixed left-0 h-screen w-[320px] ${getBackgroundClass()} transition-colors duration-500 px-6 py-12 z-50`}
+      >
+        <div className="flex flex-col h-full justify-between">
+          <div className="space-y-12">
+            <div className="space-y-4">
+              <h1 className="text-2xl font-bold text-lightest-slate">Alonso Salguero C.</h1>
+              <p className="text-slate">Full Stack Developer</p>
+              <p className="text-sm text-slate/80">
+                I build accessible, pixel-perfect digital experiences for the web.
+              </p>
+            </div>
             <NavLinks />
-            <SocialLinks />
           </div>
-        </div>
-      </div>
-
-      {/* Desktop Navigation (1024px+) */}
-      <div className="hidden lg:flex fixed left-0 h-screen w-[350px] flex-col justify-between py-24 z-50 bg-navy">
-        <div className="flex flex-col gap-20 px-12">
-          <div className="space-y-4">
-            <h1 className="text-4xl font-bold text-lightest-slate">Alonso Salguero C.</h1>
-            <h2 className="text-xl text-slate">Full Stack Developer</h2>
-            <p className="text-sm text-slate/80">I build accessible, pixel-perfect digital experiences for the web.</p>
-          </div>
-          <nav className="flex flex-col gap-8">
-            {navIds.map((id, index) => (
-              <Link
-                key={id}
-                href={`#${id}`}
-                className={`nav-link text-xs tracking-[0.2em] uppercase flex items-center gap-4 group relative overflow-hidden ${
-                  activeSection === id ? "text-green" : "text-slate hover:text-green transition-colors"
-                }`}
-                onClick={(e) => {
-                  e.preventDefault()
-                  scrollToSection(id)
-                }}
-              >
-                <div className="relative">
-                  <div
-                    className={`h-[1px] w-12 transition-all duration-300 ${
-                      activeSection === id ? "w-24 bg-green" : "bg-slate/20 group-hover:w-24 group-hover:bg-green"
-                    }`}
-                  />
-                  <div
-                    className={`absolute right-0 top-1/2 -translate-y-1/2 w-2 h-2 rounded-full transition-all duration-300 ${
-                      activeSection === id ? "bg-green opacity-100" : "bg-green opacity-0 group-hover:opacity-100"
-                    }`}
-                  />
-                </div>
-                <span className="relative z-10">{navLabels[index]}</span>
-              </Link>
-            ))}
-          </nav>
-        </div>
-        <div className="px-12">
           <SocialLinks />
         </div>
       </div>

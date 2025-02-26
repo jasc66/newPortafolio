@@ -7,6 +7,7 @@ module.exports = {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "app/**/*.{ts,tsx}",
     "components/**/*.{ts,tsx}",
+    "*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
     extend: {
@@ -19,6 +20,12 @@ module.exports = {
         "lightest-slate": "var(--lightest-slate)",
         white: "var(--white)",
         green: "var(--green)",
+        // Nuevos colores para las secciones
+        "section-1": "#0a192f",
+        "section-2": "#1d2d50",
+        "section-3": "#133b5c",
+        "section-4": "#1e5f74",
+        "section-5": "#2d4059",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

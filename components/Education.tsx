@@ -14,7 +14,7 @@ export function Education() {
   }
 
   return (
-    <section id="estudios" className="py-12 md:py-16">
+    <div className="max-w-2xl mx-auto">
       <h2 className="numbered-heading mb-10">
         <span className="text-green font-mono text-sm mr-2">02.</span>
         Estudios Académicos
@@ -77,7 +77,7 @@ export function Education() {
           </div>
         ))}
       </div>
-    </section>
+    </div>
   )
 }
 

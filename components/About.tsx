@@ -2,7 +2,7 @@ import { aboutData } from "@/data/about"
 
 export function About() {
   return (
-    <section id="about" className="max-w-2xl py-12 md:py-16">
+    <div className="max-w-2xl mx-auto">
       <h2 className="numbered-heading mb-10">
         <span className="text-green font-mono text-sm mr-2">01.</span>
         Sobre mí
@@ -20,7 +20,7 @@ export function About() {
           ))}
         </ul>
       </div>
-    </section>
+    </div>
   )
 }
 

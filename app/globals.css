@@ -18,8 +18,29 @@ html {
 }
 
 body {
-  @apply bg-navy text-slate;
+  @apply bg-navy text-light-slate;
   font-family: "SF Mono", "Fira Code", "Fira Mono", "Roboto Mono", monospace;
+}
+
+/* Mejora de legibilidad para textos */
+.numbered-heading {
+  @apply text-lightest-slate font-semibold;
+}
+
+.section-title {
+  @apply text-lightest-slate font-bold;
+}
+
+.text-body {
+  @apply text-light-slate leading-relaxed;
+}
+
+.text-highlight {
+  @apply text-lightest-slate font-medium;
+}
+
+.text-secondary {
+  @apply text-slate opacity-90;
 }
 
 .cursor {
@@ -65,7 +86,7 @@ button:hover,
   cursor: none;
 }
 
-/* Efecto hover en los enlaces de navegación */
+/* Mejora de contraste para enlaces y elementos interactivos */
 .nav-link {
   position: relative;
   transition: color 0.3s;

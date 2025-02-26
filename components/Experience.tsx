@@ -14,7 +14,7 @@ export function Experience() {
   }
 
   return (
-    <section id="experience" className="py-12 md:py-16">
+    <div className="max-w-2xl mx-auto">
       <h2 className="numbered-heading mb-10">
         <span className="text-green font-mono text-sm mr-2">03.</span>
         Dónde he trabajado
@@ -66,7 +66,7 @@ export function Experience() {
           </div>
         ))}
       </div>
-    </section>
+    </div>
   )
 }
 
