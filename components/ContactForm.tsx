@@ -54,12 +54,16 @@ export function ContactForm() {
       })
 
       const data = await response.json()
+      console.log("Respuesta del servidor:", data)
 
       if (response.ok) {
         // Mostrar toast de éxito
         toast({
           title: "¡Mensaje enviado!",
-          description: "Gracias por contactarme. Te responderé lo antes posible.",
+          description:
+            data.mode === "development"
+              ? "MODO DE DESARROLLO: El mensaje se ha simulado correctamente."
+              : "Gracias por contactarme. Te responderé lo antes posible.",
           duration: 5000, // 5 segundos
         })
 
@@ -72,13 +76,17 @@ export function ContactForm() {
           router.push("/")
         }, 2000)
       } else {
-        throw new Error(data.error || "Error al enviar el mensaje")
+        // Extraer detalles del error
+        const errorMessage = data.details || data.message || data.error || "Error desconocido"
+        const errorTip = data.tip || "Intenta nuevamente más tarde."
+        console.error("Detalles del error:", data)
+        throw new Error(`${errorMessage}. ${errorTip}`)
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error("Error al enviar el formulario:", error)
       toast({
-        title: "Error",
-        description: "Hubo un problema al enviar el mensaje. Por favor, intenta nuevamente.",
+        title: "Error al enviar el mensaje",
+        description: error.message || "Hubo un problema al enviar el mensaje. Por favor, intenta nuevamente.",
         variant: "destructive",
         duration: 5000,
       })
@@ -156,6 +164,9 @@ export function ContactForm() {
             "Enviar mensaje"
           )}
         </Button>
+        {process.env.NODE_ENV === "development" && (
+          <p className="text-xs text-slate text-center mt-2">Modo de desarrollo: El envío de correos se simulará</p>
+        )}
       </form>
     </Form>
   )
