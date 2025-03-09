@@ -12,6 +12,37 @@ export interface Project {
 
 export const projectsData: Project[] = [
   {
+    title: "Restaurante De La Finca - Sitio Principal",
+    description:
+      "Sitio web principal para el restaurante De La Finca, con información sobre el menú, galería y contacto. Desarrollado con tecnologías modernas para ofrecer una experiencia de usuario óptima.",
+    technologies: ["Next.js", "TypeScript", "Tailwind CSS"],
+    duration: "4 Semanas",
+    imageUrl: "/images/project/de-la-finca-main.png",
+    projectUrl: "https://de-la-finca-xu1n.vercel.app/",
+    tag: "Restaurante",
+    status: "En construcción",
+  },
+  {
+    title: "Portafolio Anterior",
+    description: "Mi portafolio web anterior, desarrollado con tecnologías modernas para mostrar mis proyectos y habilidades como desarrollador.",
+    technologies: ["Next.js", "TypeScript", "Tailwind CSS"],
+    duration: "3 Semanas",
+    imageUrl: "/images/project/portafolio-anterior.png",
+    projectUrl: "https://portafolio-jasc1.vercel.app/",
+    tag: "Portafolio",
+    status: "Completo",
+  },
+  {
+    title: "UpTask - Control de Tareas",
+    description: "Aplicación web para la gestión y control de tareas y proyectos con autenticación de usuarios.",
+    technologies: ["React", "Node.js", "MongoDB", "Express"],
+    duration: "6 Semanas",
+    imageUrl: "/images/project/uptask.png",
+    projectUrl: "https://up-task-frontend-omega.vercel.app/auth/login",
+    tag: "Productividad",
+    status: "En construcción",
+  },
+  {
     title: "ChatBot",
     description: "ChatBot Servicio Civil, Next js, Typescript, Tailwind CSS, en construcción",
     technologies: ["Next.js", "TypeScript", "Tailwind CSS"],
@@ -19,6 +50,17 @@ export const projectsData: Project[] = [
     imageUrl: "/images/project/chatbot.png",
     projectUrl: "https://chatbot-servicio-civil.vercel.app/",
     tag: "ChatBot",
+    status: "En construcción",
+  },
+  {
+    title: "De La Finca - Landing Page",
+    description:
+      "Página de presentación para el restaurante De La Finca en Quepos, Costa Rica, destacando su experiencia culinaria única.",
+    technologies: ["HTML", "CSS", "JavaScript"],
+    duration: "2 Semanas",
+    imageUrl: "/images/project/de-la-finca.png",
+    projectUrl: "https://de-la-finca.vercel.app/",
+    tag: "Restaurante",
     status: "En construcción",
   },
   {
