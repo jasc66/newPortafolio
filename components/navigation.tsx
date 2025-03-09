@@ -3,11 +3,13 @@
 import { useEffect, useState } from "react"
 import { Github, Linkedin, Codepen, Instagram, AtSign, Menu, Phone } from "lucide-react"
 import Link from "next/link"
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
+import { useRouter } from "next/navigation"
+import { Sheet, SheetContent, SheetTrigger, SheetTitle, SheetDescription, SheetHeader } from "@/components/ui/sheet"
 
 export function Navigation() {
   const [activeSection, setActiveSection] = useState("home")
   const [isScrolled, setIsScrolled] = useState(false)
+  const router = useRouter()
 
   const navIds = ["home", "about", "estudios", "experience", "projects"] as const
   const navLabels = ["Inicio", "Sobre Mí", "Estudios", "Experiencia", "Proyectos"]
@@ -34,12 +36,16 @@ export function Navigation() {
   }, [])
 
   const scrollToSection = (id: string) => {
-    const element = document.getElementById(id)
-    if (element) {
-      const yOffset = -80
-      const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset
-      window.scrollTo({ top: y, behavior: "smooth" })
-      setTimeout(() => setActiveSection(id), 100)
+    if (window.location.pathname !== "/") {
+      router.push(`/#${id}`)
+    } else {
+      const element = document.getElementById(id)
+      if (element) {
+        const yOffset = -80
+        const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset
+        window.scrollTo({ top: y, behavior: "smooth" })
+        setTimeout(() => setActiveSection(id), 100)
+      }
     }
   }
 
@@ -48,7 +54,7 @@ export function Navigation() {
       {navIds.map((id, index) => (
         <Link
           key={id}
-          href={`#${id}`}
+          href={`/#${id}`}
           className={`nav-link text-xs tracking-[0.2em] uppercase flex items-center gap-4 group relative ${
             activeSection === id ? "text-green font-medium" : "text-light-slate hover:text-green transition-colors"
           }`}
@@ -76,10 +82,10 @@ export function Navigation() {
   )
 
   const socialLinks = [
-    { id: "github", href: "https://github.com/jasc66", icon: Github },
+    { id: "github", href: "https://github.com/JorgeSanchezF", icon: Github },
     {
       id: "linkedin",
-      href: "https://www.linkedin.com/in/alonso-salguero/",
+      href: "https://www.linkedin.com/in/jorge-s%C3%A1nchez-fern%C3%A1ndez-a8a8b8203/",
       icon: Linkedin,
     },
     { id: "codepen", href: "#", icon: Codepen },
@@ -125,11 +131,15 @@ export function Navigation() {
   return (
     <>
       {/* Mobile Navigation */}
-      <div className={`fixed top-0 left-0 right-0 z-50 lg:hidden ${isScrolled ? "bg-navy/90 backdrop-blur-sm" : ""}`}>
-        <div className="flex items-center justify-between p-6">
+      <div
+        className={`fixed top-0 left-0 right-0 z-50 lg:hidden ${isScrolled ? "bg-navy/90 backdrop-blur-sm" : "bg-navy/50 backdrop-blur-sm"}`}
+      >
+        <div className="flex items-center justify-between p-4 sm:p-6">
           <div>
-            <h1 className="text-xl font-bold text-lightest-slate">Alonso Salguero C.</h1>
-            <p className="text-sm text-slate capitalize">{activeSection === "home" ? "Inicio" : activeSection}</p>
+            <h1 className="text-lg sm:text-xl font-bold text-lightest-slate">Alonso Salguero C.</h1>
+            <p className="text-xs sm:text-sm text-slate capitalize">
+              {activeSection === "home" ? "Inicio" : activeSection}
+            </p>
           </div>
           <Sheet>
             <SheetTrigger asChild>
@@ -139,12 +149,12 @@ export function Navigation() {
               </button>
             </SheetTrigger>
             <SheetContent side="right" className={`w-[320px] ${getBackgroundClass()} transition-colors duration-500`}>
-              <div className="flex flex-col h-full justify-between py-12">
+              <SheetHeader>
+                <SheetTitle className="text-2xl font-bold text-lightest-slate">Alonso Salguero C.</SheetTitle>
+                <SheetDescription className="text-slate">Full Stack Developer</SheetDescription>
+              </SheetHeader>
+              <div className="flex flex-col h-full justify-between py-6">
                 <div className="space-y-12">
-                  <div className="space-y-4">
-                    <h2 className="text-2xl font-bold text-lightest-slate">Alonso Salguero C.</h2>
-                    <p className="text-slate">Full Stack Developer</p>
-                  </div>
                   <NavLinks />
                 </div>
                 <SocialLinks />

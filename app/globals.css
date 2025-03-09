@@ -107,3 +107,17 @@ button:hover,
   opacity: 1;
 }
 
+@media (max-width: 478px) {
+  .section-transition {
+    padding-top: env(safe-area-inset-top); /* For devices with notches */
+  }
+
+  .numbered-heading {
+    font-size: 1.25rem; /* Smaller headings on mobile */
+  }
+
+  .text-body {
+    font-size: 0.875rem; /* Smaller body text on mobile */
+  }
+}
+

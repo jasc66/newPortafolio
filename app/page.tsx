@@ -51,11 +51,13 @@ export default function HomePage() {
         className="section-transition bg-section-1 min-h-screen flex flex-col justify-center px-6 lg:px-12 xl:px-24"
       >
         <div className="parallax-wrapper">
-          <div className="max-w-4xl float">
+          <div className="max-w-4xl pt-24 sm:pt-0">
+            {" "}
+            {/* Added padding top for mobile */}
             <p className="text-green font-mono mb-5 text-sm">Hola, mi nombre es</p>
-            <h1 className="text-lightest-slate text-5xl md:text-7xl font-bold mb-4">Alonso Salguero C.</h1>
-            <h2 className="text-slate text-4xl md:text-6xl font-bold mb-8">Full Stack Developer.</h2>
-            <p className="text-slate max-w-xl text-lg mb-12 leading-relaxed">
+            <h1 className="text-lightest-slate text-4xl sm:text-5xl md:text-7xl font-bold mb-4">Alonso Salguero C.</h1>
+            <h2 className="text-slate text-3xl sm:text-4xl md:text-6xl font-bold mb-8">Full Stack Developer.</h2>
+            <p className="text-slate max-w-xl text-base sm:text-lg mb-12 leading-relaxed">
               Soy un desarrollador especializado en construir experiencias digitales excepcionales. Actualmente, me
               enfoco en crear productos accesibles y centrados en el usuario mientras aprendo las últimas tecnologías en
               desarrollo web.

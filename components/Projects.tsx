@@ -107,13 +107,14 @@ export function Projects() {
           Proyectos
         </h2>
 
-        <div className="flex gap-4 mb-8">
+        {/* Updated filter buttons with better responsive layout */}
+        <div className="flex flex-wrap gap-2 mb-8">
           <button
             onClick={() => {
               setFilter("todos")
               setVisibleProjects(6)
             }}
-            className={`px-4 py-2 rounded transition-colors font-medium ${
+            className={`px-3 py-2 text-sm rounded transition-colors font-medium min-w-[100px] ${
               filter === "todos" ? "bg-green text-navy" : "text-light-slate hover:text-green hover:bg-green/10"
             }`}
           >
@@ -124,7 +125,7 @@ export function Projects() {
               setFilter("completo")
               setVisibleProjects(6)
             }}
-            className={`px-4 py-2 rounded transition-colors font-medium ${
+            className={`px-3 py-2 text-sm rounded transition-colors font-medium min-w-[100px] ${
               filter === "completo" ? "bg-green text-navy" : "text-light-slate hover:text-green hover:bg-green/10"
             }`}
           >
@@ -135,7 +136,7 @@ export function Projects() {
               setFilter("construccion")
               setVisibleProjects(6)
             }}
-            className={`px-4 py-2 rounded transition-colors font-medium ${
+            className={`px-3 py-2 text-sm rounded transition-colors font-medium min-w-[100px] ${
               filter === "construccion" ? "bg-green text-navy" : "text-light-slate hover:text-green hover:bg-green/10"
             }`}
           >
@@ -144,7 +145,7 @@ export function Projects() {
         </div>
       </div>
 
-      <div className="grid gap-16">
+      <div className="grid gap-8 sm:gap-16">
         {filteredProjects.slice(0, visibleProjects).map((project, index) => (
           <ProjectCard key={index} project={project} />
         ))}
