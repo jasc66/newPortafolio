@@ -10,6 +10,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { useToast } from "@/components/ui/use-toast"
 import { Loader2 } from "lucide-react"
 import { useState } from "react"
+import { useRouter } from "next/navigation"
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -29,6 +30,7 @@ const formSchema = z.object({
 export function ContactForm() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const { toast } = useToast()
+  const router = useRouter()
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -43,18 +45,42 @@ export function ContactForm() {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsSubmitting(true)
     try {
-      // Aquí iría la lógica para enviar el formulario
-      await new Promise((resolve) => setTimeout(resolve, 2000)) // Simulación de envío
-      toast({
-        title: "¡Mensaje enviado!",
-        description: "Gracias por contactarme. Te responderé lo antes posible.",
+      const response = await fetch("/api/send-email", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
       })
-      form.reset()
+
+      const data = await response.json()
+
+      if (response.ok) {
+        // Mostrar toast de éxito
+        toast({
+          title: "¡Mensaje enviado!",
+          description: "Gracias por contactarme. Te responderé lo antes posible.",
+          duration: 5000, // 5 segundos
+        })
+
+        // Resetear el formulario
+        form.reset()
+
+        // Esperar un momento para que el usuario vea el mensaje de éxito
+        setTimeout(() => {
+          // Redirigir a la página principal
+          router.push("/")
+        }, 2000)
+      } else {
+        throw new Error(data.error || "Error al enviar el mensaje")
+      }
     } catch (error) {
+      console.error("Error al enviar el formulario:", error)
       toast({
         title: "Error",
         description: "Hubo un problema al enviar el mensaje. Por favor, intenta nuevamente.",
         variant: "destructive",
+        duration: 5000,
       })
     } finally {
       setIsSubmitting(false)
