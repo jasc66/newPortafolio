@@ -212,7 +212,7 @@ export function ContactForm() {
             )}
           </Button>
           {process.env.NODE_ENV === "development" && (
-            <p className="text-xs text-slate text-center mt-2">Modo de desarrollo: El envío de correos se simulará</p>
+            <p className="text-xs text-slate text-center mt-2">Su correo ha sido enviado, pronto nos comunicaremos contigo</p>
           )}
         </form>
       </Form>
