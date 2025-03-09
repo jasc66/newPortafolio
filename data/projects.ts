@@ -74,16 +74,6 @@ export const projectsData: Project[] = [
     status: "En construcción",
   },
   {
-    title: "Restaurante De La Finca",
-    description: "Sitio de comidas para restaurante De la Finca, en construcción",
-    technologies: ["HTML", "CSS", "JavaScript"],
-    duration: "3 Semanas",
-    imageUrl: "/images/project/de-la-finca.png",
-    projectUrl: "https://de-la-finca.vercel.app/index.html",
-    tag: "Food",
-    status: "En construcción",
-  },
-  {
     title: "Contador de Calorías",
     description:
       "Contador de calorías desarrollado con React, VITE, y TypeScript, que permite realizar un seguimiento de la ingesta de alimentos. En construcción.",
