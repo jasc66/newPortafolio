@@ -7,6 +7,7 @@ import { Experience } from "@/components/Experience"
 import { Projects } from "@/components/Projects"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
+import { Download } from "lucide-react"
 import "./section-backgrounds.css"
 
 export default function HomePage() {
@@ -76,9 +77,24 @@ export default function HomePage() {
                 </a>
               </p>
             </div>
-            <Link href="/contact">
-              <Button className="w-fit">Contáctame</Button>
-            </Link>
+            <div className="flex flex-wrap gap-4">
+              <Link href="/contact">
+                <Button className="relative overflow-hidden group border border-green bg-transparent hover:bg-green/10 text-green hover:text-green transition-all duration-300 px-6 py-3 rounded-md">
+                  <span className="relative z-10">Contáctame</span>
+                  <span className="absolute inset-0 bg-green/10 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></span>
+                </Button>
+              </Link>
+              <a href="/cv-alonso-salguero.pdf" target="_blank" rel="noopener noreferrer" download>
+                <Button
+                  variant="outline"
+                  className="relative overflow-hidden group border border-green bg-transparent hover:bg-green/10 text-green hover:text-green transition-all duration-300 px-6 py-3 rounded-md"
+                >
+                  <Download className="mr-2 h-4 w-4" />
+                  <span className="relative z-10">Descargar CV</span>
+                  <span className="absolute inset-0 bg-green/10 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></span>
+                </Button>
+              </a>
+            </div>
           </div>
         </div>
       </section>
