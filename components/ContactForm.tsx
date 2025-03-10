@@ -321,9 +321,13 @@ export function ContactForm() {
                         <SelectValue placeholder="Selecciona una categoría" />
                       </SelectTrigger>
                     </FormControl>
-                    <SelectContent>
+                    <SelectContent className="bg-light-navy border-light-navy">
                       {CONTACT_CATEGORIES.map((category) => (
-                        <SelectItem key={category.value} value={category.value}>
+                        <SelectItem
+                          key={category.value}
+                          value={category.value}
+                          className="focus:bg-green/10 focus:text-green"
+                        >
                           {category.label}
                         </SelectItem>
                       ))}
@@ -454,7 +458,7 @@ export function ContactForm() {
           </Button>
 
           {process.env.NODE_ENV === "development" && (
-            <p className="text-xs text-slate text-center mt-2">Modo de desarrollo: El envío de correos se simulará prueba</p>
+            <p className="text-xs text-slate text-center mt-2">Modo de desarrollo: El envío de correos se simulará</p>
           )}
         </form>
       </Form>
