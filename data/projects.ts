@@ -18,7 +18,7 @@ export const projectsData: Project[] = [
       "Portfolio profesional para Kevin Ilama Portuguez, Ingeniero de Datos especializado en SQL, ETL, Power BI y soluciones de integración de datos para empresas.",
     technologies: ["React", "Next.js", "Tailwind CSS", "TypeScript"],
     duration: "2 Semanas",
-    imageUrl: "/images/project/Portafolio_kevin.png",
+    imageUrl: "/images/project/Portafolio_Kevin.png",
     projectUrl: "https://v0-ingeniero-web-portfolio.vercel.app/",
     tag: "Portfolio",
     status: "Completo",
