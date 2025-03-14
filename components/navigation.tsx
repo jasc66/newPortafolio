@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { Github, Linkedin, Codepen, Instagram, AtSign, Menu, Phone } from "lucide-react"
+import { Github, Linkedin, Codepen, Instagram, AtSign, Menu, Phone, ChevronDown } from "lucide-react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { Sheet, SheetContent, SheetTrigger, SheetTitle, SheetDescription, SheetHeader } from "@/components/ui/sheet"
@@ -9,6 +9,7 @@ import { Sheet, SheetContent, SheetTrigger, SheetTitle, SheetDescription, SheetH
 export function Navigation() {
   const [activeSection, setActiveSection] = useState("home")
   const [isScrolled, setIsScrolled] = useState(false)
+  const [showScrollIndicator, setShowScrollIndicator] = useState(true)
   const router = useRouter()
 
   const navIds = ["home", "about", "estudios", "experience", "projects"] as const
@@ -29,6 +30,13 @@ export function Navigation() {
       })
 
       setIsScrolled(window.scrollY > 50)
+
+      // Ocultar el indicador de desplazamiento después de cierto scroll
+      if (window.scrollY > 100) {
+        setShowScrollIndicator(false)
+      } else {
+        setShowScrollIndicator(true)
+      }
     }
 
     window.addEventListener("scroll", handleScroll, { passive: true })
@@ -82,14 +90,13 @@ export function Navigation() {
   )
 
   const socialLinks = [
-    { id: "github", href: "https://github.com/JorgeSanchezF", icon: Github },
+    { id: "github", href: "https://github.com/jasc66", icon: Github },
     {
       id: "linkedin",
-      href: "https://www.linkedin.com/in/jorge-s%C3%A1nchez-fern%C3%A1ndez-a8a8b8203/",
+      href: "https://www.linkedin.com/in/alonso-salguero/",
       icon: Linkedin,
     },
-    { id: "codepen", href: "#", icon: Codepen },
-    { id: "instagram", href: "#", icon: Instagram },
+    { id: "instagram", href: "https://www.instagram.com/jasc66/", icon: Instagram },
     { id: "email", href: "mailto:alonso.jasc@hotmail.com", icon: AtSign },
     { id: "whatsapp", href: "https://wa.me/50687109971", icon: Phone },
   ]
@@ -134,10 +141,10 @@ export function Navigation() {
       <div
         className={`fixed top-0 left-0 right-0 z-50 lg:hidden ${isScrolled ? "bg-navy/90 backdrop-blur-sm" : "bg-navy/50 backdrop-blur-sm"}`}
       >
-        <div className="flex items-center justify-between p-4 sm:p-6">
+        <div className="flex items-center justify-between p-4 max-w-full">
           <div>
-            <h1 className="text-lg sm:text-xl font-bold text-lightest-slate">Alonso Salguero C.</h1>
-            <p className="text-xs sm:text-sm text-slate capitalize">
+            <h1 className="text-lg sm:text-xl font-bold text-lightest-slate truncate">Alonso Salguero C.</h1>
+            <p className="text-xs sm:text-sm text-slate capitalize truncate">
               {activeSection === "home" ? "Inicio" : activeSection}
             </p>
           </div>
@@ -182,6 +189,14 @@ export function Navigation() {
           <SocialLinks />
         </div>
       </div>
+
+      {/* Indicador de desplazamiento */}
+      {showScrollIndicator && activeSection === "home" && (
+        <div className="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-50 animate-bounce hidden md:flex flex-col items-center">
+          <span className="text-green text-xs mb-2">Desplaza hacia abajo</span>
+          <ChevronDown className="h-6 w-6 text-green" />
+        </div>
+      )}
     </>
   )
 }

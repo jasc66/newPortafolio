@@ -20,11 +20,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es" className="scroll-smooth">
-      <body className={`${inter.className} text-slate antialiased`}>
+      <body className={`${inter.className} text-slate antialiased overflow-x-hidden`}>
         <CustomCursor />
         <div className="flex min-h-screen relative">
           <Navigation />
-          <main className="flex-1 w-full lg:ml-[300px]">{children}</main>
+          <main className="flex-1 w-full lg:ml-[300px] max-w-[100vw] overflow-x-hidden">{children}</main>
         </div>
       </body>
     </html>

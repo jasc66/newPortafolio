@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import { About } from "@/components/About"
 import { Education } from "@/components/Education"
 import { Experience } from "@/components/Experience"
@@ -12,8 +12,14 @@ import "./section-backgrounds.css"
 
 export default function HomePage() {
   const containerRef = useRef<HTMLDivElement>(null)
+  const [isLoaded, setIsLoaded] = useState(false)
 
   useEffect(() => {
+    // Simular tiempo de carga para las animaciones
+    const timer = setTimeout(() => {
+      setIsLoaded(true)
+    }, 300)
+
     const handleMouseMove = (e: MouseEvent) => {
       const sections = document.querySelectorAll<HTMLElement>(".section-transition")
       sections.forEach((section) => {
@@ -40,30 +46,45 @@ export default function HomePage() {
     window.addEventListener("scroll", handleScroll)
 
     return () => {
+      clearTimeout(timer)
       window.removeEventListener("mousemove", handleMouseMove)
       window.removeEventListener("scroll", handleScroll)
     }
   }, [])
 
   return (
-    <div className="min-h-screen" ref={containerRef}>
+    <div className="min-h-screen overflow-x-hidden" ref={containerRef}>
       <section
         id="home"
-        className="section-transition bg-section-1 min-h-screen flex flex-col justify-center px-6 lg:px-12 xl:px-24"
+        className="section-transition bg-section-1 min-h-screen flex flex-col justify-center px-4 sm:px-6 lg:px-8 xl:px-12 max-w-full"
       >
-        <div className="parallax-wrapper">
+        <div className="parallax-wrapper max-w-7xl mx-auto w-full">
           <div className="max-w-4xl pt-24 sm:pt-0">
-            {" "}
-            {/* Added padding top for mobile */}
-            <p className="text-green font-mono mb-5 text-sm">Hola, mi nombre es</p>
-            <h1 className="text-lightest-slate text-4xl sm:text-5xl md:text-7xl font-bold mb-4">Alonso Salguero C.</h1>
-            <h2 className="text-slate text-3xl sm:text-4xl md:text-6xl font-bold mb-8">Full Stack Developer.</h2>
-            <p className="text-slate max-w-xl text-base sm:text-lg mb-12 leading-relaxed">
+            <p
+              className={`text-green font-mono mb-5 text-sm transition-all duration-700 ${isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
+            >
+              Hola, mi nombre es
+            </p>
+            <h1
+              className={`text-lightest-slate text-4xl sm:text-5xl md:text-7xl font-bold mb-4 transition-all duration-700 delay-150 ${isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
+            >
+              Alonso Salguero C.
+            </h1>
+            <h2
+              className={`text-slate text-3xl sm:text-4xl md:text-6xl font-bold mb-8 transition-all duration-700 delay-300 ${isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
+            >
+              Full Stack Developer.
+            </h2>
+            <p
+              className={`text-slate max-w-xl text-base sm:text-lg mb-12 leading-relaxed transition-all duration-700 delay-450 ${isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
+            >
               Soy un desarrollador especializado en construir experiencias digitales excepcionales. Actualmente, me
               enfoco en crear productos accesibles y centrados en el usuario mientras aprendo las últimas tecnologías en
               desarrollo web.
             </p>
-            <div className="space-y-4 mb-12">
+            <div
+              className={`space-y-4 mb-12 transition-all duration-700 delay-600 ${isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
+            >
               <p>
                 <span className="text-green font-mono">Email:</span>{" "}
                 <a href="mailto:alonso.jasc@hotmail.com" className="text-slate hover:text-green transition-colors">
@@ -77,7 +98,9 @@ export default function HomePage() {
                 </a>
               </p>
             </div>
-            <div className="flex flex-wrap gap-4">
+            <div
+              className={`flex flex-wrap gap-4 transition-all duration-700 delay-750 ${isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
+            >
               <Link href="/contact">
                 <Button className="relative overflow-hidden group border border-green bg-transparent hover:bg-green/10 text-green hover:text-green transition-all duration-300 px-6 py-3 rounded-md">
                   <span className="relative z-10">Contáctame</span>
@@ -99,35 +122,30 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section id="about" className="section-transition bg-section-2 py-24 px-6 lg:px-12 xl:px-24">
-        <div className="parallax-wrapper">
-          <div className="max-w-4xl mx-auto">
-            <About />
-          </div>
+      <section id="about" className="section-transition bg-section-2 py-24 px-4 sm:px-6 lg:px-8 xl:px-12 max-w-full">
+        <div className="parallax-wrapper max-w-7xl mx-auto w-full">
+          <About />
         </div>
       </section>
 
-      <section id="estudios" className="section-transition bg-section-3 py-24 px-6 lg:px-12 xl:px-24">
-        <div className="parallax-wrapper">
-          <div className="max-w-4xl mx-auto">
-            <Education />
-          </div>
+      <section id="estudios" className="section-transition bg-section-3 py-24 px-4 sm:px-6 lg:px-8 xl:px-12 max-w-full">
+        <div className="parallax-wrapper max-w-7xl mx-auto w-full">
+          <Education />
         </div>
       </section>
 
-      <section id="experience" className="section-transition bg-section-4 py-24 px-6 lg:px-12 xl:px-24">
-        <div className="parallax-wrapper">
-          <div className="max-w-4xl mx-auto">
-            <Experience />
-          </div>
+      <section
+        id="experience"
+        className="section-transition bg-section-4 py-24 px-4 sm:px-6 lg:px-8 xl:px-12 max-w-full"
+      >
+        <div className="parallax-wrapper max-w-7xl mx-auto w-full">
+          <Experience />
         </div>
       </section>
 
-      <section id="projects" className="section-transition bg-section-5 py-24 px-6 lg:px-12 xl:px-24">
-        <div className="parallax-wrapper">
-          <div className="max-w-4xl mx-auto">
-            <Projects />
-          </div>
+      <section id="projects" className="section-transition bg-section-5 py-24 px-4 sm:px-6 lg:px-8 xl:px-12 max-w-full">
+        <div className="parallax-wrapper max-w-7xl mx-auto w-full">
+          <Projects />
         </div>
       </section>
     </div>
