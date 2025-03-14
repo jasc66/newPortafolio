@@ -7,8 +7,14 @@ import Image from "next/image"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Loader } from "@/components/ui/loader"
+import { NewBadge } from "@/components/NewBadge"
+
+// Definir los proyectos nuevos para mostrar la etiqueta
+const NEW_PROJECTS = ["Portfolio de Karla Brenes", "Portfolio de Ingeniero de Datos"]
 
 function ProjectCard({ project }: { project: Project }) {
+  const isNewProject = NEW_PROJECTS.includes(project.title)
+
   return (
     <a
       href={project.projectUrl}
@@ -16,6 +22,7 @@ function ProjectCard({ project }: { project: Project }) {
       rel="noopener noreferrer"
       className="block group relative overflow-hidden rounded-lg bg-light-navy hover:bg-lightest-navy transition-colors duration-300"
     >
+      {isNewProject && <NewBadge />}
       <div className="flex flex-col md:flex-row">
         <div className="relative h-48 md:h-auto md:w-72 flex-shrink-0 overflow-hidden">
           <div className="absolute inset-0 bg-navy/30 group-hover:bg-transparent transition-colors duration-300 z-10" />

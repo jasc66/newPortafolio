@@ -11,6 +11,18 @@ export interface Project {
 }
 
 export const projectsData: Project[] = [
+  
+  {
+    title: "Portfolio de Ingeniero de Datos",
+    description:
+      "Portfolio profesional para Kevin Ilama Portuguez, Ingeniero de Datos especializado en SQL, ETL, Power BI y soluciones de integración de datos para empresas.",
+    technologies: ["React", "Next.js", "Tailwind CSS", "TypeScript"],
+    duration: "2 Semanas",
+    imageUrl: "/images/project/Portafolio_kevin.png",
+    projectUrl: "https://v0-ingeniero-web-portfolio.vercel.app/",
+    tag: "Portfolio",
+    status: "Completo",
+  },
   {
     title: "Restaurante De La Finca - Sitio Principal",
     description:
@@ -21,6 +33,17 @@ export const projectsData: Project[] = [
     projectUrl: "https://de-la-finca-xu1n.vercel.app/",
     tag: "Restaurante",
     status: "En construcción",
+  },
+  {
+    title: "Portfolio de Karla Brenes",
+    description:
+      "Elegante portafolio web para Karla Tatiana Brenes Campos, Analista Programador, con un diseño moderno en tonos marrones y dorados, destacando su experiencia profesional y habilidades.",
+    technologies: ["React", "Next.js", "Tailwind CSS", "Framer Motion"],
+    duration: "3 Semanas",
+    imageUrl: "/images/project/Portafolio_Karla.png",
+    projectUrl: "https://v0-pdf-to-html-template.vercel.app/",
+    tag: "Portfolio",
+    status: "Completo",
   },
   {
     title: "Portafolio Anterior",
