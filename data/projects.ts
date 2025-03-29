@@ -19,7 +19,7 @@ export const projectsData: Project[] = [
     technologies: ["React", "Next.js", "Tailwind CSS", "TypeScript"],
     duration: "2 Semanas",
     imageUrl: "/images/project/Portafolio_Kevin.png",
-    projectUrl: "https://v0-ingeniero-web-portfolio.vercel.app/",
+    projectUrl: "https://kevin-portafolio.vercel.app/",
     tag: "Portfolio",
     status: "Completo",
   },
