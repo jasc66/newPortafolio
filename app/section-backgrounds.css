@@ -1,0 +1,110 @@
+/* Base styles for sections */
+.section-transition {
+  position: relative;
+  width: 100%;
+  transition: all 0.5s ease-in-out;
+  overflow: hidden;
+}
+
+/* Gradient backgrounds with multiple layers */
+.bg-section-1 {
+  background: radial-gradient(circle at 0% 0%, rgba(29, 45, 80, 0.4) 0%, transparent 50%),
+    radial-gradient(circle at 100% 100%, rgba(30, 95, 116, 0.2) 0%, transparent 50%),
+    linear-gradient(135deg, #0a192f 0%, #1d2d50 100%);
+}
+
+.bg-section-2 {
+  background: radial-gradient(circle at 100% 0%, rgba(19, 59, 92, 0.4) 0%, transparent 50%),
+    radial-gradient(circle at 0% 100%, rgba(45, 64, 89, 0.2) 0%, transparent 50%),
+    linear-gradient(135deg, #1d2d50 0%, #133b5c 100%);
+}
+
+.bg-section-3 {
+  background: radial-gradient(circle at 0% 0%, rgba(30, 95, 116, 0.4) 0%, transparent 50%),
+    radial-gradient(circle at 100% 100%, rgba(29, 45, 80, 0.2) 0%, transparent 50%),
+    linear-gradient(135deg, #133b5c 0%, #1e5f74 100%);
+}
+
+.bg-section-4 {
+  background: radial-gradient(circle at 100% 0%, rgba(45, 64, 89, 0.4) 0%, transparent 50%),
+    radial-gradient(circle at 0% 100%, rgba(19, 59, 92, 0.2) 0%, transparent 50%),
+    linear-gradient(135deg, #1e5f74 0%, #2d4059 100%);
+}
+
+.bg-section-5 {
+  background: radial-gradient(circle at 0% 0%, rgba(29, 45, 80, 0.4) 0%, transparent 50%),
+    radial-gradient(circle at 100% 100%, rgba(10, 25, 47, 0.2) 0%, transparent 50%),
+    linear-gradient(135deg, #2d4059 0%, #0a192f 100%);
+}
+
+/* Floating effect overlay */
+.section-transition::before,
+.bg-section-1::before,
+.bg-section-2::before,
+.bg-section-3::before,
+.bg-section-4::before,
+.bg-section-5::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(
+    circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(100, 255, 218, 0.07) 0%,
+    transparent 50%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.section-transition:hover::before,
+.bg-section-1:hover::before,
+.bg-section-2:hover::before,
+.bg-section-3:hover::before,
+.bg-section-4:hover::before,
+.bg-section-5:hover::before {
+  opacity: 1;
+}
+
+/* Glow effect at section boundaries */
+.section-transition::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(100, 255, 218, 0.1) 50%, transparent 100%);
+}
+
+.section-transition::after {
+  bottom: 0;
+}
+
+/* Parallax effect wrapper */
+.parallax-wrapper {
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.1s ease-out;
+}
+
+/* Floating animation for subtle movement */
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.float {
+  animation: float 6s ease-in-out infinite;
+}
+
