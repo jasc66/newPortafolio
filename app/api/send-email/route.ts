@@ -1,9 +1,6 @@
 import { type NextRequest, NextResponse } from "next/server"
 import { Resend } from "resend"
 
-// Inicializa Resend con tu API key
-const resend = new Resend(process.env.RESEND_API_KEY)
-
 // Configura el correo de destino
 const TO_EMAIL = process.env.TO_EMAIL || "alonso.jasc@hotmail.com"
 // Siempre usamos el dominio predeterminado de Resend para el remitente para evitar problemas de verificación
@@ -83,6 +80,9 @@ function getClientIp(req: NextRequest): string {
 
 export async function POST(request: NextRequest) {
   try {
+    // Inicializa Resend con tu API key
+    const resend = new Resend(process.env.RESEND_API_KEY)
+
     // Verificar límite de tasa por IP
     const clientIp = getClientIp(request)
     const rateLimitInfo = getRateLimitInfo(clientIp)
